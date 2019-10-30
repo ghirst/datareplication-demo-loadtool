@@ -1,0 +1,22 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.EntityFrameworkCore": "Error"
+    }
+  },
+  "ConnectionStrings": {
+    "SqlServer": "Data Source=<hostname>;Initial Catalog=<initial database name>;User ID=<user>;Password=<password>"
+  },
+  "replicationBucket": "<S3 bucket name>",
+  "replicationBucketPrefix": "<filter name if>",
+  "ProjectName": "<project name>",
+  "Environment": "<environment name>",
+  "LocalCachePath": "<local folder to store cached files>",
+  "ParallelFullLoadStreams": <number of streams for full load>,
+  "AWS": {
+    "Profile": "<aws profile name>",
+    "Region": "<aws region>"
+  }
+
+}
