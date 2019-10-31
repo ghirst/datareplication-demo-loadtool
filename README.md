@@ -9,11 +9,6 @@ The tool has been written in a modular fashion with the intention that it could 
 ## Key Objects
 ![Key Objects](/doco/images/codeobjects.png)
 
-
-```bash
-pip install foobar
-```
-
 ### Providers
 The providers are an access layer to lower-level services
 
@@ -31,7 +26,7 @@ Currently, there is one implementation of this called S3Service to perform these
 #### IDatabaseService
 This interface allows for an implementation of operations on the required RDBMS target
 
-Current methods allow for
+methods allow for
 
 * Bulk Load a file to target database/table
 * Bulk load a file to a temp table and then UPSERT
@@ -86,18 +81,18 @@ This interface currently implements a single generic method expected to perform 
 
 Currently, the single implementation of this called FullLoadFileConsumer will perform the actions above with the following additional logic
 
-looks for files starting with the name "LOAD" to ensure we only look at full load files
-if a file that does not begin with "LOAD" is found it is assumed to be a delta file, the consumer enters shutdown mode, the assumption is that the files are being added to the queue in the correct order and a delta file in the queue means all full load files have been processed
-the full load process works using multiple threads, given there is no issue with concurrency and ordering for the initial load this allows the initial baseline to be loaded as fast as possible
+* looks for files starting with the name "LOAD" to ensure we only look at full load files
+* if a file that does not begin with "LOAD" is found it is assumed to be a delta file, the consumer enters shutdown mode, the assumption is that the files are being added to the queue in the correct order and a delta file in the queue means all full load files have been processed
+* the full load process works using multiple threads, given there is no issue with concurrency and ordering for the initial load this allows the initial baseline to be loaded as fast as possible
 
 #### IDeltaFileConsumer
 This interface currently implements a single generic method expected to perform the general actions called "StartPolling"
 
 Currently, the single implementation of this called DeltaFileConsumer will perform the actions with the following additional logic
 
-looks for files that do not start with the name "LOAD" to ensure we only look at delta files
-if a file that begins with "LOAD" is found it is assumed to be a full load file, he consumer enters shutdown mode, the assumption is that the files are being added to the queue in the correct order and a full load file in the queue means that the replication process has been restarted and requires investigation
-Unlike the full load process, the delta process will only process and load a single file at a time to ensure concurrency
+* looks for files that do not start with the name "LOAD" to ensure we only look at delta files
+* if a file that begins with "LOAD" is found it is assumed to be a full load file, he consumer enters shutdown mode, the assumption is that the files are being added to the queue in the correct order and a full load file in the queue means that the replication process has been restarted and requires investigation
+* Unlike the full load process, the delta process will only process and load a single file at a time to ensure concurrency
 
 ### Misc/Other objects
 #### Program
@@ -117,7 +112,7 @@ The startup class implements a standard configuration object using the appsettin
 
 # The appsettings.config file
 
-```JSON
+```json
 {
   "Logging": {
     "LogLevel": {
@@ -140,25 +135,24 @@ The startup class implements a standard configuration object using the appsettin
   }
 }
 ```
-Logging
 
-ConnectionStrings.SqlServer
+### Logging
 
-replicationBucket
+### ConnectionStrings
 
-replicationBucketPrefix
+### replicationBucket
 
-ProjectName
+### replicationBucketPrefix
 
-Environment
+### ProjectName
 
-LocalCachePath
+### Environment
 
-ParallelFullLoadStreams
+### LocalCachePath
 
-AWS.Profile
+### ParallelFullLoadStreams
 
-AWS.Region
+### AWS
 
 # How to deploy
 
