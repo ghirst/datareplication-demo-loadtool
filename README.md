@@ -49,7 +49,9 @@ A simple class that contains common details of files stored in both the remote s
 
 It should be expected that the source endpoint from the replication service stores files using the following path/naming scheme
 
+```
 /<database name>/<table name>/<file name>
+```
 
 The file object allows storing the file location as well as the path information is broken down to help downstream processes both local and remote
 
