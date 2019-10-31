@@ -7,7 +7,7 @@ The tool has been written in a modular fashion with the intention that it could 
 # Code Structure
 
 ## Key Objects
-![Key Objects](/doco/images/codeobjects.svg)
+![Key Objects](/doco/images/codeobjects.png)
 
 
 ```bash
@@ -22,9 +22,10 @@ This interface allows for an implementation of file fetching operations from a r
 
 Current methods allow for
 
-List files at the source
-Download an object
-Delete an object
+* List files at the source
+* Download an object
+* Delete an object
+
 Currently, there is one implementation of this called S3Service to perform these actions with an AWS S3 bucket
 
 #### IDatabaseService
@@ -32,8 +33,9 @@ This interface allows for an implementation of operations on the required RDBMS 
 
 Current methods allow for
 
-Bulk Load a file to target database/table
-Bulk load a file to a temp table and then UPSERT
+* Bulk Load a file to target database/table
+* Bulk load a file to a temp table and then UPSERT
+
 Currently, there is one implementation of this called SqlServerDatabaseService targeted at Microsoft SQL Server 2016+
 
 #### ILocalCacheService
@@ -43,9 +45,9 @@ Storing the file locally prior to using the target RDBMS's bulk insert functiona
 
 Current methods allow for
 
-ist files that were downloaded but not processed
-mark a file as "done" (renames file to add .done extension)
-get Local file object
+* list files that were downloaded but not processed
+* mark a file as "done" (renames file to add .done extension)
+* get Local file object
 
 #### FileObject
 A simple class that contains common details of files stored in both the remote source and local cache
@@ -111,7 +113,7 @@ the main method will also look for user input of "Q" and return at any time to s
 The startup class implements a standard configuration object using the appsettings.json file as well as dependency injection for all the services
 
 ## Basic workflow
-![Code flow](/doco/images/codeflow.svg)
+![Code flow](/doco/images/codeflow.png)
 
 # The appsettings.config file
 
