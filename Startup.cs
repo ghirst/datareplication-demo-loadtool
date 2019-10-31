@@ -37,7 +37,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool
 
             // Add Our Own Services
             services.AddTransient<IDatabaseService, SqlServerDatabaseService>();
-            services.AddTransient<IS3Service, S3Service>();
+            services.AddTransient<IRemoteEndpointService, S3Service>();
             services.AddTransient<IFileProducer, S3FileProducer>();
             services.AddTransient<IFullLoadFileConsumer, FullLoadFileConsumer>();
             services.AddTransient<IDeltaFileConsumer, DeltaFileConsumer>();

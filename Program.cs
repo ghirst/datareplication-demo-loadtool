@@ -38,7 +38,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool
             }
             
         }
-        private static async void RunOptionsAndReturnExitCode(CommandLineOptions opts)
+        private static void RunOptionsAndReturnExitCode(CommandLineOptions opts)
         {
 
         Console.WriteLine("Starting Gentrack.Tools.DataReplicationLoadTool");
@@ -59,6 +59,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool
             Task fileProducerTask = fileProducer.StartPolling(masterQueue, cancelToken);
 
             Task fileConsumerTask;
+
             if (opts.Type.Equals("Full"))
             {
                 IFullLoadFileConsumer fileConsumer = serviceProvider.GetService<IFullLoadFileConsumer>();
@@ -73,30 +74,32 @@ namespace Gentrack.Tools.DataReplicationLoadTool
             {
                 throw new System.ArgumentException("Run mode must be selected");
             }
-            
-            while (!Console.ReadLine().Equals("Q"))
-            {
-                //Wait for User to Quit
-            }
 
-            Console.WriteLine("Trying to shutdown");
+            Task userInputTask = Task.Run(() =>
+            {
+                while (!Console.ReadLine().Equals("Q"))
+                {
+                    //Wait for User to Quit
+                }
+            });
+            
+            Task.WaitAny(new Task[] { fileProducerTask, fileConsumerTask, userInputTask });
             
             cancelTokenSource.Cancel();
 
-
-            Task allTasks = Task.WhenAll(new Task[] { fileProducerTask, fileConsumerTask });
+            Console.WriteLine("Trying to shutdown");
 
             try
             {
-                await allTasks;
+                Task.WaitAll(new Task[] { fileProducerTask, fileConsumerTask, userInputTask });
             }
-            catch
+            catch (AggregateException ae)
             {
-                AggregateException allExceptions = allTasks.Exception;
+                throw ae.Flatten();
             }
+            
 
             Console.WriteLine("END0");
-
 
 
         }

@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace Gentrack.Tools.DataReplicationLoadTool.Providers
 {
-    public interface IS3Service
+    public interface IRemoteEndpointService
     {
-        Task<List<FileObject>> GetBucketFileList();
+        Task<List<FileObject>> GetFileList();
         Task<string> SyncObjectToLocalCache(string fileKey);
         Task DeleteObject(string fileKey);
     }

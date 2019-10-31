@@ -13,11 +13,11 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Producers
     {
         private readonly IConfiguration _config;
         private readonly ILogger _logger;
-        private readonly IS3Service _s3Service;
+        private readonly IRemoteEndpointService _s3Service;
         private readonly ILocalCacheService _localCacheService;
 
         private const int S3_POLL_INTERVAL = 10000;
-        public S3FileProducer(IConfigurationRoot config, ILogger<S3FileProducer> logger, IS3Service s3Service, ILocalCacheService localCacheService)
+        public S3FileProducer(IConfigurationRoot config, ILogger<S3FileProducer> logger, IRemoteEndpointService s3Service, ILocalCacheService localCacheService)
         {
             _config = config;
             _logger = logger;
@@ -56,7 +56,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Producers
                 _logger.LogInformation("Polling bucket...");
 
                 // Now check actual source endpoint
-                var fileList = await _s3Service.GetBucketFileList();
+                var fileList = await _s3Service.GetFileList();
 
                 // first add any files for full load
                 foreach (var file in fileList.Where(z => z.FileName.StartsWith("LOAD")).OrderBy(x => x.FileName))

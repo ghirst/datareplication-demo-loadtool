@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Gentrack.Tools.DataReplicationLoadTool.Providers
 {
-    public class S3Service : IS3Service
+    public class S3Service : IRemoteEndpointService
     {
         private readonly IConfiguration _config;
         private readonly ILogger _logger;
