@@ -180,16 +180,40 @@ This is the name of the AWS profile that should be created inside the AWS Creden
 # How to deploy
 
 ## Pre Requisites
+
 * Install the AWS CLI and ensure the AWS Credentials file is setup
 * Add an entry to the credentials file using the access key details provided by Gentrack
 * Ensure there is enough space provisioned and a folder created/identified for the local cache (referenced in appsettings.config
 * Ensure there is an SQLServer instance provisioned where an initial database has been created based on the schema details provided by Gentrack
 
 ## Running the service
+
 1. Compile and create a release of the solution for the target architecture required
 1. Create an appsettings.config file as per the details in the section above
 1. Run the tool in full load mode (use -m "full")
 1. Run the tool in delta mode (use -m "delta")
+
+# Things to think about / To be done
+
+## Transactional Integrity
+
+If we want to acheive perfect consistancy with the source data, then we would need to look at changing the delta load process to only update the target tables once all records for all tables by "commit date"
+
+## Polling objects and ordering
+
+The correct way to poll objects and order is by "modified date time", this will ensure we process files as execpted in a production use case
+The current demonstration code takes the approach of
+a) first take all the files starting with LOAD , not caring about the order of these
+b) then take all the delta files and order by name (the file names have the date time stamp of creation in it)
+The reason for this approach is when testing, AWS S3 Buckets do not allow preserving last modified date when copying test data
+The ideal solution here is to update the code to have both methods controlled by a flag
+
+## Potential future roadmap items
+
+* Process a schema update file
+* Impliment a Postgres version of the IDatabaseService
+* Impliment a MySql version of the IDatabaseService
+* Better error control and reporting
 
 
 ## License
