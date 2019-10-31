@@ -29,7 +29,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
             _s3BucketPrefix = _config.GetValue<string>("replicationBucketPrefix");
             _baseCachePath = _config.GetValue<string>("LocalCachePath");
         }
-        public async Task<List<FileObject>> GetBucketFileList()
+        public async Task<List<FileObject>> GetFileList()
         {
             _logger.LogDebug($"Checking for Objects in Bucket '{_s3Bucket}'");
 
