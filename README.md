@@ -139,24 +139,57 @@ The startup class implements a standard configuration object using the appsettin
 ```
 
 ### Logging
+The recomended option is "Information" logging only
+the "Debug" options is also supported
 
 ### ConnectionStrings
+As per the example above, ensure that hostname, initial catalog, user id, password are populated
+Currently only supports the SqlServer value
 
 ### replicationBucket
+The name of the S3 Bucket where the files can be found
 
 ### replicationBucketPrefix
+This parameter allows the filtering of objects from the S3 Bucket, it is recommended to only be used when testing and wanting to limit the process to a single file
+
+e.g by adding a value such as
+```
+\customerdbname\Account\LOAD000001.csv
+```
+
+The service will only look for the specified object
 
 ### ProjectName
+Currently unused
 
 ### Environment
+Currently unused
 
 ### LocalCachePath
+The local folder where the process can download and cache the replication files in to
 
 ### ParallelFullLoadStreams
+The number of streams that should be used when processing full load files
+the recommendation is to choose a number based on the resources of the target database instance
 
 ### AWS
+#### AWS Profile
+This is the name of the AWS profile that should be created inside the AWS Credentials file matching the access details required for the source S3 Bucket that should be used
+
 
 # How to deploy
+
+## Pre Requisites
+* Install the AWS CLI and ensure the AWS Credentials file is setup
+* Add an entry to the credentials file using the access key details provided by Gentrack
+* Ensure there is enough space provisioned and a folder created/identified for the local cache (referenced in appsettings.config
+* Ensure there is an SQLServer instance provisioned where an initial database has been created based on the schema details provided by Gentrack
+
+## Running the service
+1. Compile and create a release of the solution for the target architecture required
+1. Create an appsettings.config file as per the details in the section above
+1. Run the tool in full load mode (use -m "full")
+1. Run the tool in delta mode (use -m "delta")
 
 
 ## License
