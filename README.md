@@ -7,7 +7,7 @@ The tool has been written in a modular fashion with the intention that it could 
 # Code Structure
 
 ## Key Objects
-![Key Objects](code objects.svg)
+![Key Objects](/doco/images/code objects.svg)
 
 
 ```bash
@@ -111,7 +111,7 @@ the main method will also look for user input of "Q" and return at any time to s
 The startup class implements a standard configuration object using the appsettings.json file as well as dependency injection for all the services
 
 ## Basic workflow
-![Code flow](code flow.svg)
+![Code flow](/doco/images/code flow.svg)
 
 # The appsettings.config file
 
