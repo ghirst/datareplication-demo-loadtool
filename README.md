@@ -116,25 +116,34 @@ The startup class implements a standard configuration object using the appsettin
 
 ```json
 {
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.EntityFrameworkCore": "Error"
-    }
-  },
-  "ConnectionStrings": {
-    "SqlServer": "Data Source=<hostname>;Initial Catalog=<initial database name>;User ID=<user>;Password=<password>"
-  },
-  "replicationBucket": "<S3 bucket name>",
-  "replicationBucketPrefix": "<filter name if>",
-  "ProjectName": "<project name>",
-  "Environment": "<environment name>",
-  "LocalCachePath": "<local folder to store cached files>",
-  "ParallelFullLoadStreams": <number of streams for full load>,
-  "AWS": {
-    "Profile": "<aws profile name>",
-    "Region": "<aws region>"
-  }
+	"Logging": {
+		"LogLevel": {
+			"Default": "Information",
+			"Microsoft.EntityFrameworkCore": "Error"
+		}
+	},
+	"ConnectionStrings": {
+		"SqlServer": "Data Source=<hostname>;Initial Catalog=<initial database name>;User ID=<user>;Password=<password>"
+	},
+	"DatabaseMapping": [{
+			"SourceDatabaseKey": "<sourceKey>",
+			"TargetDatabaseKey": "<targetKey>"
+		},
+		{
+			"SourceDatabaseKey": "<sourceKey>",
+			"TargetDatabaseKey": "<targetKey>"
+		}
+	],
+	"replicationBucket": "<S3 bucket name>",
+	"replicationBucketPrefix": "<filter name if>",
+	"ProjectName": "<project name>",
+	"Environment": "<environment name>",
+	"LocalCachePath": "<local folder to store cached files>",
+	"ParallelFullLoadStreams": "<number of streams for full load>",
+	"AWS": {
+		"Profile": "<aws profile name>",
+		"Region": "<aws region>"
+	}
 }
 ```
 
@@ -145,6 +154,10 @@ the "Debug" options is also supported
 ### ConnectionStrings
 As per the example above, ensure that hostname, initial catalog, user id, password are populated
 Currently only supports the SqlServer value
+
+### DatabaseMapping
+Allows for mapping the source database names used and target database names you may want to point/rename at
+*You should request the support team to provide the source names an ensure a 1 - 1 mapping is created
 
 ### replicationBucket
 The name of the S3 Bucket where the files can be found
