@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -61,6 +60,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Producers
                 // first add any files for full load
                 foreach (var file in fileList.Where(z => z.FileName.StartsWith("LOAD")).OrderBy(x => x.FileName))
                 {
+
                     _logger.LogInformation($"Downloading file to local cache :: {file.FileKey}");
 
                     var localKey = await _s3Service.SyncObjectToLocalCache(file.FileKey);
@@ -69,8 +69,8 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Producers
 
                     fileQueue.Enqueue(_localCacheService.GetFileObjectFromLocal(localKey));
                     
-                    _logger.LogDebug($"Delete object on s3 bucket :: {file.FileKey}");
-
+                    _logger.LogDebug($"Delete object on s3 bucket :: {file.FileKey}"); 
+                    
                     await _s3Service.DeleteObject(file.FileKey);
 
                 }

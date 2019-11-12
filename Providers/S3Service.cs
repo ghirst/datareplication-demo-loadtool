@@ -63,7 +63,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
             var tmpPathStructure = inputObject.Key.Split(new char[] { '\\', '/' });
             int folderCnt = tmpPathStructure.Length;
             var tableName = tmpPathStructure[folderCnt - 2];
-            var databaseName = tmpPathStructure[folderCnt - 4] + "_repl";
+            var databaseName = tmpPathStructure[folderCnt - 4];
 
             return new FileObject()
             {

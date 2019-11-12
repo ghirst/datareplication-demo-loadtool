@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,6 @@ using Gentrack.Tools.DataReplicationLoadTool.Producers;
 using Gentrack.Tools.DataReplicationLoadTool.Providers;
 using Microsoft.Extensions.DependencyInjection;
 using CommandLine;
-using Microsoft.SqlServer.Management.Dmf;
 
 
 namespace Gentrack.Tools.DataReplicationLoadTool
@@ -38,10 +38,18 @@ namespace Gentrack.Tools.DataReplicationLoadTool
             }
             
         }
+
+        private static void WaitForUserQuit(CancellationToken cancelToken)
+        {
+            while (!Console.ReadLine().Equals("Q") && !cancelToken.IsCancellationRequested)
+            {
+                //Wait for User to Quit
+            }
+        }
         private static void RunOptionsAndReturnExitCode(CommandLineOptions opts)
         {
 
-        Console.WriteLine("Starting Gentrack.Tools.DataReplicationLoadTool");
+            Console.WriteLine("Starting Gentrack.Tools.DataReplicationLoadTool");
 
             ConcurrentQueue<FileObject> masterQueue = new ConcurrentQueue<FileObject>();
 
@@ -75,29 +83,26 @@ namespace Gentrack.Tools.DataReplicationLoadTool
                 throw new System.ArgumentException("Run mode must be selected");
             }
 
-            Task userInputTask = Task.Run(() =>
-            {
-                while (!Console.ReadLine().Equals("Q"))
-                {
-                    //Wait for User to Quit
-                }
-            });
-            
+            Task userInputTask = Task.Run(() => WaitForUserQuit(cancelToken));
+
             Task.WaitAny(new Task[] { fileProducerTask, fileConsumerTask, userInputTask });
-            
+
             cancelTokenSource.Cancel();
 
             Console.WriteLine("Trying to shutdown");
 
             try
             {
-                Task.WaitAll(new Task[] { fileProducerTask, fileConsumerTask, userInputTask });
+                Task.WaitAll(new Task[] { fileProducerTask, fileConsumerTask });
             }
             catch (AggregateException ae)
             {
-                throw ae.Flatten();
+                foreach (var e in ae.InnerExceptions)
+                {
+                  Console.WriteLine(e.ToString());  
+                }
+                throw;
             }
-            
 
             Console.WriteLine("END0");
 

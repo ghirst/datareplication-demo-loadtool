@@ -2,10 +2,12 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Gentrack.Tools.DataReplicationLoadTool.Providers;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Binder;
 using Microsoft.Extensions.Logging;
 
 namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
@@ -17,16 +19,20 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
         private readonly IDatabaseService _dbService;
         private readonly ILocalCacheService _localCacheService;
         private readonly int _parallelFullLoadStreams;
-        
+        private readonly List<DatabaseMappingObject> _databaseMappingList;
+        private readonly string _sourceDatabaseKey;
 
         private const int FULL_LOAD_POLL_INTERVAL = 10000;
-        public FullLoadFileConsumer(IConfigurationRoot config, ILogger<FullLoadFileConsumer> logger, IDatabaseService dbService, ILocalCacheService localCacheService)
+
+        public FullLoadFileConsumer(IConfigurationRoot config, ILogger<FullLoadFileConsumer> logger,
+            IDatabaseService dbService, ILocalCacheService localCacheService)
         {
             _config = config;
             _logger = logger;
             _parallelFullLoadStreams = _config.GetValue<int>("ParallelFullLoadStreams");
             _dbService = dbService;
             _localCacheService = localCacheService;
+            _databaseMappingList = _config.GetSection("DatabaseMapping").Get<DatabaseMappingObject[]>().ToList();
         }
 
         public async Task StartPolling(ConcurrentQueue<FileObject> fileQueue, CancellationToken cancelToken)
@@ -39,14 +45,15 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
             using (var concurrencySemaphore = new SemaphoreSlim(_parallelFullLoadStreams))
             {
                 var tasks = new List<Task>();
-                while (!cancelToken.IsCancellationRequested && !incrementalFileFound)
+
+                while (!cancelToken.IsCancellationRequested && !incrementalFileFound )
                 {
                     if (fileQueue.Count > 0 && fileQueue.TryDequeue(out var fileObject))
                     {
                         _logger.LogInformation($"Processing file {fileObject.FileKey}");
 
                         concurrencySemaphore.Wait(cancelToken);
-                        var thisTask = Task.Factory.StartNew(async () =>
+                        var thisTask = Task.Run(async () =>
                         {
                             try
                             {
@@ -58,27 +65,34 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
                                 }
                                 else
                                 {
-                                    await _dbService.BulkLoadFile(fileObject.DatabaseName, fileObject.TableName, fileObject.FileKey);
+                                    var targetDatabaseName = _databaseMappingList
+                                        .Where(y => y.SourceDatabaseKey.Equals(fileObject.DatabaseName))
+                                        .Select(x => x.TargetDatabaseKey).First();
+
+                                    await _dbService.BulkLoadFile(targetDatabaseName, fileObject.TableName,
+                                        fileObject.FileKey);
 
                                     _localCacheService.MarkFileAsDone(fileObject.FileKey);
-
                                 }
+                            }
+                            catch (Exception e)
+                            {
+                                _logger.LogCritical(e.ToString());
+                                throw e;
                             }
                             finally
                             {
                                 concurrencySemaphore.Release();
                             }
-                        }, cancelToken);
+                        });
 
                         tasks.Add(thisTask);
-
                     }
                     else
                     {
                         _logger.LogInformation("FullLoad File Consumer:: Queue Empty ");
                         await Task.Delay(FULL_LOAD_POLL_INTERVAL, cancelToken);
                     }
-
                 }
 
                 await Task.WhenAll(tasks.ToArray());
@@ -87,7 +101,6 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
                 {
                     _logger.LogInformation("Delta file has been found - shutting down Full Load Process");
                 }
-                    
             }
         }
     }
