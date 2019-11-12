@@ -1,5 +1,8 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Gentrack.Tools.DataReplicationLoadTool.Providers;
@@ -14,6 +17,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
         private readonly ILogger _logger;
         private readonly IDatabaseService _dbService;
         private readonly ILocalCacheService _localCacheService;
+        private readonly List<DatabaseMappingObject> _databaseMappingList;
 
         private const int DELTA_LOAD_POLL_INTERVAL = 10000;
 
@@ -24,6 +28,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
             _logger = logger;
             _dbService = dbService;
             _localCacheService = localCacheService;
+            _databaseMappingList = _config.GetSection("DatabaseMapping").Get<DatabaseMappingObject[]>().ToList();
         }
 
         public async Task StartPolling(ConcurrentQueue<FileObject> fileQueue, CancellationToken cancelToken)
@@ -43,12 +48,17 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
                     if (fileObject.FileName.StartsWith("LOAD"))
                     {
                         //assume we found an incremental file so its time to shut down the full load
-                        _logger.LogDebug("Full Load file has been found ");
+                        _logger.LogCritical("Full Load file has been found");
+                        //throw new Exception("Full Load file has been found");
                         fullLoadFileFound = true;
                     }
                     else
                     {
-                        await _dbService.BulkLoadAndUpsertFile(fileObject.DatabaseName, fileObject.TableName, fileObject.FileKey);
+                        var targetDatabaseName = _databaseMappingList
+                            .Where(y => y.SourceDatabaseKey.Equals(fileObject.DatabaseName))
+                            .Select(x => x.TargetDatabaseKey).First();
+
+                        await _dbService.BulkLoadAndUpsertFile(targetDatabaseName, fileObject.TableName, fileObject.FileKey);
 
                         _localCacheService.MarkFileAsDone(fileObject.FileKey);
                     }

@@ -20,7 +20,6 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
         private readonly ILocalCacheService _localCacheService;
         private readonly int _parallelFullLoadStreams;
         private readonly List<DatabaseMappingObject> _databaseMappingList;
-        private readonly string _sourceDatabaseKey;
 
         private const int FULL_LOAD_POLL_INTERVAL = 10000;
 
@@ -45,8 +44,8 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
             using (var concurrencySemaphore = new SemaphoreSlim(_parallelFullLoadStreams))
             {
                 var tasks = new List<Task>();
-
-                while (!cancelToken.IsCancellationRequested && !incrementalFileFound )
+                bool isRunning = true;
+                while (!cancelToken.IsCancellationRequested && !incrementalFileFound && isRunning)
                 {
                     if (fileQueue.Count > 0 && fileQueue.TryDequeue(out var fileObject))
                     {
@@ -60,7 +59,8 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
                                 if (!fileObject.FileName.StartsWith("LOAD"))
                                 {
                                     //assume we found an incremental file so its time to shut down the full load
-                                    _logger.LogDebug("Delta file has been found ");
+                                    _logger.LogCritical("Delta file has been found");
+                                    //throw new Exception("Delta file has been found");
                                     incrementalFileFound = true;
                                 }
                                 else
@@ -78,6 +78,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
                             catch (Exception e)
                             {
                                 _logger.LogCritical(e.ToString());
+                                isRunning = false;
                                 throw e;
                             }
                             finally
@@ -85,7 +86,6 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
                                 concurrencySemaphore.Release();
                             }
                         });
-
                         tasks.Add(thisTask);
                     }
                     else

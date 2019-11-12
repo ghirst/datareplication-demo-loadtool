@@ -61,7 +61,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool
             Startup startup = new Startup();
             startup.ConfigureServices(services);
 
-            IServiceProvider serviceProvider = services.BuildServiceProvider();
+            var serviceProvider = services.BuildServiceProvider();
 
             IFileProducer fileProducer = serviceProvider.GetService<IFileProducer>();
             Task fileProducerTask = fileProducer.StartPolling(masterQueue, cancelToken);
@@ -103,6 +103,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool
                 }
                 throw;
             }
+            serviceProvider.Dispose();
 
             Console.WriteLine("END0");
 
