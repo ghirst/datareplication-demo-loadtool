@@ -1,0 +1,1139 @@
+[
+  {
+    "FolderName": "x",
+    "ProcessName": "FullImport"
+  },
+  {
+    "FolderName": "Account",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "AccountContact",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "AccountReviewPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "AccountTransaction",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "AccountTransactionType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "AccountTxnReviewPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "AccountType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Address",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Asset",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "AssetType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Bill",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillAdhocItem",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillAdhocItemReason",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillBreakdownLine",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillBreakdownLineType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillCollectionTransaction",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillDailySummary",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillDirty",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillDirtyReason",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BilledMeterReading",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillEmail",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillFile",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillHierarchyHistory",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillingCycle",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillingEntity",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillingEntityBillImage",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillingEntityCustClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillPackage",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillPackageAccountType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillRequest",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillRequestPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillSms",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillStaticText",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BillStaticTextKey",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Broker",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "BrokerAgent",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CalendarHoliday",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CclCert",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ComplaintReferralSource",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ComplaintType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Component",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ConsumptionCurve",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ConsumptionCurvePtTimZone",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ConsumptionCurvePtTimZoneDetail",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ConsumptionCurvePtTimZoneDetailConsolidated",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ConsumptionCurvePtTimZoneHeader",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Contact",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ContactType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ContactVersion",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CostType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Credit",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CreditBreakdownLine",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CreditBreakdownLineType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CreditReason",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Currency",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Customer",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CustomerClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CustomerContact",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CustomerProperty",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CustomerTeamUser",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "CustomerType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "DayDfn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "DayString",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "DayType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "DayTypeDfn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "DayTypeList",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "DayTypeListMember",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "DirectDebit",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "DirectDebitCollection",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "DirectDebitInstruction",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "EntityTbl",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ExtraValueDfnGroup",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ExtraValueInstGroup",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "GasConsumptionCurvePtTimZone",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "GasConsumptionCurvePtTimZoneDetail",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "GasConsumptionCurvePtTimZoneHeader",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "GeneralLedgerCode",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "HalfHourRateDfn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "HalfHourRateDfnItem",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "HhRateDfnItemDayType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "HourDfn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "IndexPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "IndexPrice",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "IndexTbl",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "IndexVersion",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ManualBill",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MarketParticipant",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Meter",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterMeasurementType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterPoint",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterPointConfigPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterPointPhyTimeSeries",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterPointTimeSeries",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterReadingConfig",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterRegister",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterRegisterConfigPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterRegisterType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterServiceInst",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterServiceStandardInst",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MeterType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MetricUnit",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MetricUnitType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Mpan",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanConfigPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCost",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCostDetail",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCostDetail_loaded",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCostDetailArchive",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCostDetailConsolidated",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCostDetailHeader",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCostDetailHeader_loaded",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCostDetailHeaderSME",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCostDetailSME",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCostPriceVersion",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanCostSummary",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanEac",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanEacSet",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanEacv",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanEapd",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanProductItem",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanProductItemDfn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanProductItemPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanProductItemRate",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanReadingFrequency",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MpanSupplyStatus",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Mprn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MprnAnnualQuantity",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MprnConfigPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MprnCost",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MprnCostSummary",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MprnForecast",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MprnIgtPrice",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MprnReadingFrequency",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MprnSoq",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MprnSupplyPointCategory",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "MprnSupplyStatus",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Offer",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "OfferCancelReason",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "OfferClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "OfferProductBundle",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "OfferPropertyAsset",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PassthruBillHist",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Payment",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PaymentMethod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PaymentMethodType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PaymentPlan",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PaymentPlanPayment",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PaymentPlanTransaction",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PaymentRequest",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PaymentRequestAttempt",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PaymentTerm",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PriceQuality",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PriceQualitySet",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Product",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductBundle",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductBundleDfn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductBundleDfnGroup",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductBundleDfnType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductDfn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductFlexClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductItem",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductItemClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductItemDfn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductItemType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductPropertyAsset",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductSubType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ProductType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PropertyDfnGroup",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PropertyInst",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PropertyInstGroup",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PropertyTbl",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Prospect",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PurchasingGroup",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PurchasingGroupLock",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PurchasingGroupMeterPoint",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "PurchasingGroupRefVolume",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Quote",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "QuoteModel",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "QuoteModelMapping",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "QuoteMpanCost",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "QuoteMpanPrice",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "QuoteMprnCost",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "QuoteMprnPrice",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "RateMetricType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "RateName",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "RateNameGroup",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "RecurringItemDfn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "RecurringItemInst",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "RecurringItemInstAmount",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Repayment",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "SalesTax",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ServiceRating",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "ServiceRatingRate",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Team",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Ticket",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TicketCancelReason",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TicketComplaint",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TicketDefinition",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TicketEntity",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TicketHistory",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TicketPriority",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TicketStep",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TicketType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TicketWorkflow",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TimeSeriesEventReason",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TimeSeriesQuality",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TimeSeriesSource",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TimeZoneTbl",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "Title",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "TransactionAllocation",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkCfdFitEiiExemptionCert",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistChargeClassMapping",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistribAreaLossFactor",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistribAreaLossPeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistribAreaPriceVersion",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistribAreaRate",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistribAreaRatePeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistribConnectionType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistribEhvLossFactor",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistribUnitChargePeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistributionArea",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkDistributionChargeClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkElectricityOfferParams",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasDnExitCapacityCharge",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasDnLdzCustomerCharge",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasDnLdzSystemCapacity",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasDnLdzSystemCommodity",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasDnPriceVersion",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasDnRatePeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasEucLoadFactor",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasExitZone",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasFullEndUserCategory",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasLdzCalorificValue",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasLocalDistribZone",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasNtsPriceVersion",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasNtsRatePeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasSettlementClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGasWeatherCorrection",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGspGroup",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkGspGroupDistributor",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkLineLossFactorClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkLlfcConnectTypeMapping",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkMeasurementClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkMeasurementQuantity",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkMeasurementQuantMapping",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkMeterTimeswitchClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkMtcMarketParticipant",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkProfileClass",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkPurchGroupTradeFacility",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkQuoteBrokerMargin",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkQuoteSupplierMargin",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkSscTprMapping",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkStdSettlementConfig",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTimePatternRegime",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTprClockInterval",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTprMapping",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTprMappingSet",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTprMappingSetRateName",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTrade",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTradeFacilityGroup",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTradeIndex",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTradeIndexPrice",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTradeIndexVersion",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTuosLossFactor",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTuosRate",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTuosRatePeriod",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkTuosVersion",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UkVatCertificate",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UserTbl",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UtilityMarket",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UtilityTimeSeriesEvent",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UtilityTimeSeriesEventArchive",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UtilityTimeSeriesEventDaily",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UtilityTimeSeriesEventHistory",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UtilityTimeSeriesEventStatusUpdate",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UtilityTimeSeriesEventTemp",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "UtilityTimeSeriesEventTriads",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "YearDayType",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "YearDayTypePart",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "YearTypeDfn",
+    "ProcessName": "StagingImport"
+  },
+  {
+    "FolderName": "YearTypeDfnYearPart",
+    "ProcessName": "StagingImport"
+  },
+
+  {
+    "FolderName": "Account",
+    "ProcessName": "Blah"
+  }
+]

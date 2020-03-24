@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Gentrack.Tools.DataReplicationLoadTool.localCachePath;
 using Gentrack.Tools.DataReplicationLoadTool.Providers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
 {
@@ -40,7 +39,6 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
             // use Semaphore to control the number of threads
             while (!cancelToken.IsCancellationRequested && !fullLoadFileFound)
             {
-
                 if (fileQueue.Count > 0 && fileQueue.TryDequeue(out var fileObject))
                 {
                     _logger.LogInformation($"Processing file {fileObject.FileKey}");
@@ -54,11 +52,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
                     }
                     else
                     {
-                        var targetDatabaseName = _databaseMappingList
-                            .Where(y => y.SourceDatabaseKey.Equals(fileObject.DatabaseName))
-                            .Select(x => x.TargetDatabaseKey).First();
-
-                        await _dbService.BulkLoadAndUpsertFile(targetDatabaseName, fileObject.TableName, fileObject.FileKey);
+                        await new UploadIfFileValid().Uploader(fileObject);
 
                         _localCacheService.MarkFileAsDone(fileObject.FileKey);
                     }

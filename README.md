@@ -6,7 +6,7 @@ The tool has been written in a modular fashion with the intention that it could 
 
 # Code Structure
 
-## Key Objects
+## Key Objects 
 ![Key Objects](/doco/images/codeobjects.png)
 
 ### Providers

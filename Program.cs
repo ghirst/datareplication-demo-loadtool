@@ -1,33 +1,31 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using CommandLine;
 using Gentrack.Tools.DataReplicationLoadTool.Consumers;
 using Gentrack.Tools.DataReplicationLoadTool.Producers;
 using Gentrack.Tools.DataReplicationLoadTool.Providers;
 using Microsoft.Extensions.DependencyInjection;
-using CommandLine;
-
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Gentrack.Tools.DataReplicationLoadTool
 {
-    class Program
+    internal class Program
     {
         private class CommandLineOptions
         {
             //commit options here
-            [Option('m', "mode", Required = true, HelpText = "Set processing mode to ether \"Full\" or \"Delta\"")]
+            [Option('m', "Mode", Required = true, HelpText = "Set processing mode to ether \"Full\" or \"Delta\"")]
             public string Type { get; set; }
         }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Parser.Default.ParseArguments<CommandLineOptions>(args)
-                .WithParsed<CommandLineOptions>(opts => RunOptionsAndReturnExitCode(opts))
-                .WithNotParsed<CommandLineOptions>((errs) => HandleParseError(errs.ToList()));
+                .WithParsed(opts => RunOptionsAndReturnExitCode(opts))
+                .WithNotParsed((errs) => HandleParseError(errs.ToList()));
         }
 
         private static void HandleParseError(List<Error> errorList)
@@ -36,7 +34,6 @@ namespace Gentrack.Tools.DataReplicationLoadTool
             {
                 Console.WriteLine(error.Tag);
             }
-            
         }
 
         private static void WaitForUserQuit(CancellationToken cancelToken)
@@ -46,9 +43,9 @@ namespace Gentrack.Tools.DataReplicationLoadTool
                 //Wait for User to Quit
             }
         }
+
         private static void RunOptionsAndReturnExitCode(CommandLineOptions opts)
         {
-
             Console.WriteLine("Starting Gentrack.Tools.DataReplicationLoadTool");
 
             ConcurrentQueue<FileObject> masterQueue = new ConcurrentQueue<FileObject>();
@@ -99,15 +96,13 @@ namespace Gentrack.Tools.DataReplicationLoadTool
             {
                 foreach (var e in ae.InnerExceptions)
                 {
-                  Console.WriteLine(e.ToString());  
+                    Console.WriteLine(e.ToString());
                 }
-                throw;
+                //throw;
             }
             serviceProvider.Dispose();
 
             Console.WriteLine("END0");
-
-
         }
     }
 }

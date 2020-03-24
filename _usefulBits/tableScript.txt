@@ -1,0 +1,54 @@
+USE [CSVData]
+GO
+
+/****** Object:  Table [dbo].[tblCSV]    Script Date: 04/03/2020 15:01:05 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblCSV](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+[Operation] [nvarchar](max) NULL,
+[CommitTimeStamp] [nvarchar](max) NULL,
+[billingEntityFk] [nvarchar](max) NULL,
+[parentAccountFk] [nvarchar](max) NULL,
+[customerFk] [nvarchar](max) NULL,
+[accountTypeFk] [nvarchar](max) NULL,
+[number] [nvarchar](max) NULL,
+[name] [nvarchar](max) NULL,
+[createdDttm] [nvarchar](max) NULL,
+[createdUserTblFk] [nvarchar](max) NULL,
+[fromDttm] [nvarchar](max) NULL,
+[toDttm] [nvarchar](max) NULL,
+[terminatedUserTblFk] [nvarchar](max) NULL,
+[closedDttm] [nvarchar](max) NULL,
+[currencyFk] [nvarchar](max) NULL,
+[languageTblFk] [nvarchar](max) NULL,
+[dunningPackageFk] [nvarchar](max) NULL,
+[billPackageFk] [nvarchar](max) NULL,
+[billingCycleFk] [nvarchar](max) NULL,
+[billingAlignDttm] [nvarchar](max) NULL,
+[initialBillStatus] [nvarchar](max) NULL,
+[paymentTermFk] [nvarchar](max) NULL,
+[payPointLocation] [nvarchar](max) NULL,
+[salesTaxExemptFl] [nvarchar](max) NULL,
+[lastAccountTransactionFk] [nvarchar](max) NULL,
+[cancelFl] [nvarchar](max) NULL,
+[cancelledDttm] [nvarchar](max) NULL,
+[cancelledUserTblFk] [nvarchar](max) NULL,
+[terminatedDttm] [nvarchar](max) NULL,
+[parentOverridesChildFl] [nvarchar](max) NULL,
+[overrideAllocateCreditOnRebill] [nvarchar](max) NULL,
+[autoRebillBehaviour] [nvarchar](max) NULL,
+[reference] [nvarchar](max) NULL,
+[deleteFl] [nvarchar](max) NULL,
+[versionNo] [nvarchar](max) NULL,
+[partitionId] [nvarchar](max) NULL,
+
+
+) ON [PRIMARY]
+GO
+
+

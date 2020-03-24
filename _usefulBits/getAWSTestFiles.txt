@@ -1,0 +1,2 @@
+aws s3 cp s3://gt-prod-replication-603c425b-05b9-475e-8356-32a73c4882f7/ReplicationService/GDFSuez_uat/dbo/Account/LOAD__2020-03-02_04-47-45-249.csv C:\Source\Repos\b2b-junifer-data-warehouse\localCachePath
+download: s3://gt-prod-replication-603c425b-05b9-475e-8356-32a73c4882f7/ReplicationService/GDFSuez_uat/dbo/Account/LOAD__2020-03-02_04-47-45-249.csv to ..\..\Source\Repos\b2b-junifer-data-warehouse\localCachePath\LOAD__2020-03-02_04-47-45-249.csv

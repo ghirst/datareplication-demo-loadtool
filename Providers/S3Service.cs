@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Amazon.S3;
+using Amazon.S3.Model;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Amazon.S3;
-using Amazon.S3.Model;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace Gentrack.Tools.DataReplicationLoadTool.Providers
 {
@@ -29,6 +29,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
             _s3BucketPrefix = _config.GetValue<string>("replicationBucketPrefix");
             _baseCachePath = _config.GetValue<string>("LocalCachePath");
         }
+
         public async Task<List<FileObject>> GetFileList()
         {
             _logger.LogDebug($"Checking for Objects in Bucket '{_s3Bucket}'");
@@ -51,7 +52,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
 
                 request.Marker = response.NextMarker;
             }
-            while(response.IsTruncated);
+            while (response.IsTruncated);
 
             return results;
         }
@@ -86,28 +87,26 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
                 BucketName = _s3Bucket,
 
                 Key = fileKey,
-
             };
 
             using (var getObjectResponse = await _s3Client.GetObjectAsync(getObjectRequest))
             {
-
                 if (!File.Exists(localPath))
                 {
                     getObjectResponse.WriteObjectProgressEvent += Response_WriteObjectProgressEvent;
 
                     await getObjectResponse.WriteResponseStreamToFileAsync(localPath, true, CancellationToken.None);
-
                 }
                 else
                 {
                     _logger.LogCritical("ERROR - file already exists ::" + localPath);
                 }
             }
-            
+
             _logger.LogDebug("Download Complete S3 link ::" + fileKey);
             return localPath;
         }
+
         private void Response_WriteObjectProgressEvent(object sender, WriteObjectProgressArgs e)
         {
             if (e.PercentDone % 10 == 0)
@@ -125,7 +124,6 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
             };
 
             var deleteObjectResponse = await _s3Client.DeleteObjectAsync(deleteObjectRequest);
-            
         }
     }
 }

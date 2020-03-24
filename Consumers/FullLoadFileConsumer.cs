@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Gentrack.Tools.DataReplicationLoadTool.localCachePath;
+using Gentrack.Tools.DataReplicationLoadTool.Providers;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Gentrack.Tools.DataReplicationLoadTool.Providers;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Binder;
-using Microsoft.Extensions.Logging;
 
 namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
 {
-    class FullLoadFileConsumer : IFullLoadFileConsumer
+    internal class FullLoadFileConsumer : IFullLoadFileConsumer
     {
         private readonly IConfiguration _config;
         private readonly ILogger _logger;
@@ -22,6 +23,13 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
         private readonly List<DatabaseMappingObject> _databaseMappingList;
 
         private const int FULL_LOAD_POLL_INTERVAL = 10000;
+
+
+        public class TableList
+        {
+            public string FolderName { get; set; }
+            public string ProcessName { get; set; }
+        }
 
         public FullLoadFileConsumer(IConfigurationRoot config, ILogger<FullLoadFileConsumer> logger,
             IDatabaseService dbService, ILocalCacheService localCacheService)
@@ -65,14 +73,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
                                 }
                                 else
                                 {
-                                    var targetDatabaseName = _databaseMappingList
-                                        .Where(y => y.SourceDatabaseKey.Equals(fileObject.DatabaseName))
-                                        .Select(x => x.TargetDatabaseKey).First();
-
-                                    await _dbService.BulkLoadFile(targetDatabaseName, fileObject.TableName,
-                                        fileObject.FileKey);
-
-                                    _localCacheService.MarkFileAsDone(fileObject.FileKey);
+                                    await Uploader(fileObject);
                                 }
                             }
                             catch (Exception e)
@@ -101,6 +102,48 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Consumers
                 {
                     _logger.LogInformation("Delta file has been found - shutting down Full Load Process");
                 }
+            }
+        }
+
+        private async Task Uploader(FileObject fileObject)
+        {
+            var targetDatabaseName = _databaseMappingList
+                                                                            .Where(y => y.SourceDatabaseKey.Equals(fileObject.DatabaseName))
+                                                                            .Select(x => x.TargetDatabaseKey).First();
+            string folderList = @"..\..\..\localCachePath\validTableList.json";
+
+            var tableRequired = 0;
+            if (File.Exists(folderList))
+            {
+                String JSONtxt = File.ReadAllText(folderList);
+                tableRequired = JsonConvert.DeserializeObject<IEnumerable<TableList>>(JSONtxt)
+                .Where(s => s.ProcessName == "StagingImport")
+                .Where(s => s.FolderName == fileObject.TableName)
+                .Count();
+
+                if (!tableRequired.Equals(0))
+                {
+                    try
+                    {
+                        await _dbService.BulkLoadFile(targetDatabaseName, "Junifer." + fileObject.TableName,
+                        fileObject.FileKey);
+
+
+                    }
+                    catch (Exception e)
+                    {
+
+                        var x = e.ToString();
+                    }
+
+                }
+                else
+                {
+                    _logger.LogInformation("Did not find table: " + fileObject.TableName + " in json list. File deleted, not imported.");
+                }
+
+
+                _localCacheService.MarkFileAsDone(fileObject.FileKey);
             }
         }
     }

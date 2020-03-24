@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Gentrack.Tools.DataReplicationLoadTool": {
+      "commandName": "Project",
+      "commandLineArgs": "-m Full"
+    }
+  }
+}

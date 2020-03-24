@@ -1,0 +1,14 @@
+09/03/2020 08:59:31 (UTC) :Column 'ukGasFullEndUserCategoryFk' does not allow DBNull.Value.
+09/03/2020 08:59:32 (UTC) :Violation of PRIMARY KEY constraint 'AccountPk'. Cannot insert duplicate key in object 'dbo.Account'. The duplicate key value is (1).
+The statement has been terminated.
+09/03/2020 08:59:33 (UTC) :Cannot insert duplicate key row in object 'dbo.AccReceivableRoleLimit' with unique index 'AccReceivableRoleLimitAk'. The duplicate key value is (1).
+The statement has been terminated.
+12/03/2020 12:27:54 (UTC) :Cannot find column 33.
+12/03/2020 12:31:05 (UTC) :Cannot find column 33.
+12/03/2020 12:32:01 (UTC) :Cannot find column 33.
+16/03/2020 11:09:26 (UTC) :Violation of PRIMARY KEY constraint 'AccountPk'. Cannot insert duplicate key in object 'Junifer.Account'. The duplicate key value is (1).
+The statement has been terminated.
+16/03/2020 11:09:47 (UTC) :Violation of PRIMARY KEY constraint 'AccountPk'. Cannot insert duplicate key in object 'Junifer.Account'. The duplicate key value is (1).
+The statement has been terminated.
+16/03/2020 11:20:50 (UTC) :Violation of PRIMARY KEY constraint 'AccountPk'. Cannot insert duplicate key in object 'Junifer.Account'. The duplicate key value is (1).
+The statement has been terminated.

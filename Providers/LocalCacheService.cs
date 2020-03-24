@@ -1,20 +1,20 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace Gentrack.Tools.DataReplicationLoadTool.Providers
 {
-    class LocalCacheService : ILocalCacheService
+    internal class LocalCacheService : ILocalCacheService
     {
         private readonly IConfiguration _config;
         private readonly ILogger _logger;
         private readonly string _baseCachePath;
 
         private const int MAX_FILE_RETENTION_PERIOD_DAYS = -90;
+
         public LocalCacheService(IConfigurationRoot config, ILogger<S3Service> logger)
         {
             _config = config;
@@ -48,7 +48,6 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
             {
                 throw E;
             }
-
         }
 
         public void CleanUpOldFiles()

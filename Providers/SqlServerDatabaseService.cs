@@ -1,17 +1,18 @@
-﻿using System;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
-using System.Threading.Tasks;
-using GenericParsing;
+﻿using GenericParsing;
+using Gentrack.Tools.DataReplicationLoadTool.localCachePath;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Gentrack.Tools.DataReplicationLoadTool.Providers
 {
-    class SqlServerDatabaseService : IDatabaseService
+    internal class SqlServerDatabaseService : IDatabaseService
     {
         private readonly ILogger _logger;
         private readonly IConfiguration _config;
@@ -21,7 +22,6 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
         private const int SQL_BULKLOAD_BATCH_SIZE = 1000;
         private const int SQL_BULKLOAD_TIMEOUT = 600;
         private const int CSV_PARSER_BUFFER_SIZE = 131072;
-        
 
         public SqlServerDatabaseService(IConfigurationRoot config, ILogger<SqlServerDatabaseService> logger)
         {
@@ -34,7 +34,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
         {
             //  Take care of the SQL Connection
             SqlConnectionStringBuilder sqlStringBuilder =
-                new SqlConnectionStringBuilder(_sqlConnectionString) {InitialCatalog = databaseName};
+                new SqlConnectionStringBuilder(_sqlConnectionString) { InitialCatalog = databaseName };
 
             var sqlCnn = new SqlConnection(sqlStringBuilder.ConnectionString);
             sqlCnn.Open();
@@ -61,12 +61,16 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
             {
                 using (var csvParser = new GenericParserAdapter(csvFilePath))
                 {
-                    csvParser.FirstRowHasHeader = false;
+
+                    //TODO Check column order! 
+
+                    csvParser.FirstRowHasHeader = true;
                     csvParser.MaxBufferSize = CSV_PARSER_BUFFER_SIZE;
 
                     //  iterate through the CSV file
                     while (csvParser.Read())
                     {
+                        //var x =csvParser. TODO: Column names to check
                         //  write out a batch from the data table
                         if (batchTrack == DATATABLE_BATCH_SIZE)
                         {
@@ -85,9 +89,16 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
                         //  Ensure Null values are converted to DBNull
                         var thisDr = thisDt.NewRow();
 
-                        for (var i = 2; i < csvParser.ColumnCount; i++)
+                        //for (var i = 2; i < csvParser.ColumnCount; i++)
+                        //{
+                        //    var targetCol = i - 2;
+
+                        //    thisDr[targetCol] = ProcessColumn(csvParser[i], thisDt.Columns[targetCol].DataType);
+                        //}
+
+                        for (var i = 0; i < csvParser.ColumnCount; i++)
                         {
-                            var targetCol = i - 2;
+                            var targetCol = i;
 
                             thisDr[targetCol] = ProcessColumn(csvParser[i], thisDt.Columns[targetCol].DataType);
                         }
@@ -108,10 +119,10 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
 
                 sqlCnn.Close();
                 sqlCnn.Dispose();
-
             }
             catch (Exception e)
             {
+                ErrorHandling.LogErrorToFile(e);
                 Console.WriteLine(e);
             }
         }
@@ -120,7 +131,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
         {
             //  Take care of the SQL Connection
             SqlConnectionStringBuilder sqlStringBuilder =
-                new SqlConnectionStringBuilder(_sqlConnectionString) {InitialCatalog = databaseName};
+                new SqlConnectionStringBuilder(_sqlConnectionString) { InitialCatalog = databaseName };
 
             var sqlCnn = new SqlConnection(sqlStringBuilder.ConnectionString);
             sqlCnn.Open();
@@ -156,7 +167,6 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
                 {
                     parser.FirstRowHasHeader = false;
                     parser.MaxBufferSize = CSV_PARSER_BUFFER_SIZE;
-
 
                     //  iterate through the CSV file
                     while (parser.Read())
@@ -222,11 +232,10 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
                     thisDt = null;
                 }
 
-                // Do a form of UPSERT based on the incoming file having 
+                // Do a form of UPSERT based on the incoming file having
                 // I = insert
                 // U = update
                 // D = delete
-
 
                 // first delete records matching any operation in target table
                 var delCmd =
@@ -258,42 +267,31 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
                     cmd.CommandTimeout = 120;
                     cmd.ExecuteNonQuery();
                 }
-                
 
                 sqlCnn.Close();
                 sqlCnn.Dispose();
-
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-            }
-
-
-            //var endDttm = DateTime.Now;
-            //var span = endDttm.Subtract(startDttm);
-            //Console.WriteLine(endDttm + ":: Finished Task ID:::" + taskId + "(" + tableName + ")::: " + "Duration (minutes): " + span.TotalMinutes);
+            } 
         }
 
         private async Task BulkInsertDataTable(SqlConnection sqlCnn, DataTable sourceData, string targetTable)
         {
-            using (var sqlBulk = new SqlBulkCopy(sqlCnn))
-            {
-                sqlBulk.DestinationTableName = targetTable;
-                sqlBulk.BulkCopyTimeout = SQL_BULKLOAD_TIMEOUT;
-                sqlBulk.BatchSize = SQL_BULKLOAD_BATCH_SIZE;
-                await sqlBulk.WriteToServerAsync(sourceData);
-            }
+            using var sqlBulk = new SqlBulkCopy(sqlCnn);
+            sqlBulk.DestinationTableName = targetTable;
+            sqlBulk.BulkCopyTimeout = SQL_BULKLOAD_TIMEOUT;
+            sqlBulk.BatchSize = SQL_BULKLOAD_BATCH_SIZE;
+            await sqlBulk.WriteToServerAsync(sourceData);
         }
 
         private string[] CreateTempTable(SqlConnection sqlCnn, string databaseName, string sourceTableName)
         {
-
             //  Create a tmp table called "sqlTmp" matching the target table structure with additional 2 columns
             //  to track operations
             var targetServer = new Server(new ServerConnection(sqlCnn));
             var sourceTable = targetServer.Databases[databaseName].Tables[sourceTableName];
-
 
             if (targetServer.Databases[databaseName].Tables["sqlTmp"] != null)
             {
@@ -364,8 +362,7 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
             dynamic colOut;
             if (outType == typeof(int))
             {
-                int x;
-                if (int.TryParse(colIn, out x))
+                if (int.TryParse(colIn, out int x))
                     colOut = x;
                 else
                     colOut = DBNull.Value;
@@ -380,48 +377,42 @@ namespace Gentrack.Tools.DataReplicationLoadTool.Providers
             }
             else if (outType == typeof(Int32))
             {
-                Int32 x;
-                if (Int32.TryParse(colIn, out x))
+                if (Int32.TryParse(colIn, out int x))
                     colOut = x;
                 else
                     colOut = DBNull.Value;
             }
             else if (outType == typeof(Int64))
             {
-                Int64 x;
-                if (Int64.TryParse(colIn, out x))
+                if (Int64.TryParse(colIn, out long x))
                     colOut = x;
                 else
                     colOut = DBNull.Value;
             }
             else if (outType == typeof(DateTime))
             {
-                DateTime x;
-                if (DateTime.TryParse(colIn, out x))
+                if (DateTime.TryParse(colIn, out DateTime x))
                     colOut = x;
                 else
                     colOut = DBNull.Value;
             }
             else if (outType == typeof(DateTime))
             {
-                DateTime x;
-                if (DateTime.TryParse(colIn, out x))
+                if (DateTime.TryParse(colIn, out DateTime x))
                     colOut = x;
                 else
                     colOut = DBNull.Value;
             }
             else if (outType == typeof(Char))
             {
-                Char x;
-                if (Char.TryParse(colIn, out x))
+                if (Char.TryParse(colIn, out char x))
                     colOut = x;
                 else
                     colOut = DBNull.Value;
             }
             else if (outType == typeof(Decimal))
             {
-                Decimal x;
-                if (Decimal.TryParse(colIn, out x))
+                if (Decimal.TryParse(colIn, out decimal x))
                     colOut = x;
                 else
                     colOut = DBNull.Value;
